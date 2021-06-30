@@ -6,7 +6,7 @@ public class MyBoardDTO {
 	private String id;
 	private String name;
 	private String contents;
-	
+	 
 	public int getIdx() {
 		return idx;
 	}
