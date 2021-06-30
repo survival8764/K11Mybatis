@@ -2,6 +2,7 @@ package mybatis;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 /*
@@ -11,8 +12,33 @@ import org.springframework.stereotype.Service;
 @Service
 public interface MybatisDAOImpl {
 
-	// 게시물 수 카운트 하기
-	public int getTotalCount();
-	// 목록에 출력할 게시물 가져오기
-	public ArrayList<MyBoardDTO> listPage(int s, int e);
+//================================ 1차버전 ==========================================
+//	// 게시물 수 카운트 하기
+//	public int getTotalCount();
+//	// 목록에 출력할 게시물 가져오기
+//	public ArrayList<MyBoardDTO> listPage(int s, int e);
+	
+	// 2차버전(게시물 검색 추가)
+	public int getTotalCount(ParameterDTO parameterDTO);
+	
+	public ArrayList<MyBoardDTO> listPage(ParameterDTO parameterDTO);
+	
+	/*
+		Mapper에서 파라미터를 처리할 수 있는 세번째 방법으로, @Param
+		어노테이션을 사용한다. 이때는 변수명을 그대로 Mapper에서
+		사용할 수 있다.
+	 */
+	public void write(@Param("_name") String name,
+				@Param("_contents") String contents,
+				@Param("_id") String id);
+	
+	// 기존의 게시물 조회
+	public MyBoardDTO view(ParameterDTO parameterDTO);
+	
+	// 수정처리
+	public int modify(MyBoardDTO myBoardDTO);
+	
+	// 삭제처리
+	public int delete(String idx, String id);
+	
 }
